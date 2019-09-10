@@ -19,6 +19,9 @@ public class Springboot04TaskApplicationTests {
 	@Autowired
 	JavaMailSenderImpl mailSender;
 
+	/**
+	 * 测试发送简单邮件
+	 */
 	@Test
 	public void contextLoads() {
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -26,14 +29,21 @@ public class Springboot04TaskApplicationTests {
 		message.setSubject("通知-今晚开会");
 		message.setText("今晚7:30开会");
 
-		message.setTo("17512080612@163.com");
-		message.setFrom("534096094@qq.com");
+		message.setTo("994266136@qq.com");
+
+		//发送方一定要用配置的账号（spring.mail.username）
+		// 否则会报错：com.sun.mail.smtp.SMTPSendFailedException: 553 Mail from must equal authorized user
+		message.setFrom("13611481645@163.com");
 
 		mailSender.send(message);
 	}
 
+	/**
+	 * 测试发送复杂的邮件
+	 * @throws Exception
+	 */
 	@Test
-	public void test02() throws  Exception{
+	public void test02() throws Exception {
 		//1、创建一个复杂的消息邮件
 		MimeMessage mimeMessage = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);

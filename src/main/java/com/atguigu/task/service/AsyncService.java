@@ -6,7 +6,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AsyncService {
 
-    //告诉Spring这是一个异步方法
+    /**
+     * 声明这是一个异步方法
+     * 适合比较耗时、不需要返回结果的方法
+     *
+     * @return
+     */
     @Async
     public void hello(){
         try {
